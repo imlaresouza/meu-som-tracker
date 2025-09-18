@@ -1,79 +1,43 @@
+# 🎵 MeuSomTracker
 
----
+**MeuSomTracker** é um projeto desenvolvido em linguagem C como parte da Atividade 3 de programação estruturada. O objetivo é registrar e analisar as escutas musicais semanais do usuário, utilizando vetores e matrizes para organizar os dados e gerar estatísticas pessoais.
 
-## 💻 Código-Fonte (meusomtracker.c)
+## 🎯 Objetivo
 
-```c
-#include <stdio.h>
-#include <string.h>
+Transformar dados reais do cotidiano — neste caso, escutas de músicas favoritas — em informações úteis e organizadas. O programa identifica o dia com mais escutas, a faixa mais tocada e apresenta um gráfico de popularidade.
 
-#define DIAS 7
-#define MUSICAS 5
+## 🎶 Músicas Monitoradas
 
-int main() {
-    int escutas[DIAS][MUSICAS];
-    int totalPorDia[DIAS] = {0};
-    int totalPorMusica[MUSICAS] = {0};
+1. Creep – Radiohead  
+2. Boys Don’t Cry – The Cure  
+3. Iris – Goo Goo Dolls  
+4. Somebody’s Watching Me – Rockwell  
+5. Spending My Time – Roxette
 
-    char dias[DIAS][10] = {"Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"};
-    char musicas[MUSICAS][40] = {
-        "Creep - Radiohead",
-        "Boys Don't Cry - The Cure",
-        "Iris - Goo Goo Dolls",
-        "Somebody's Watching Me - Rockwell",
-        "Spending My Time - Roxette"
-    };
+## 🧠 Funcionalidades
 
-    printf("🎵 Bem-vindo ao MeuSomTracker!\n");
-    printf("Vamos registrar quantas vezes você ouviu suas músicas favoritas durante a semana.\n\n");
+- Registro de escutas por dia da semana
+- Cálculo de totais por dia e por música
+- Identificação do “Dia de Pico” e “Hit da Semana”
+- Gráfico textual com símbolos ♪ para popularidade
+- Interface simples e amigável para iniciantes
 
-    for (int i = 0; i < DIAS; i++) {
-        printf("Dia %s:\n", dias[i]);
-        for (int j = 0; j < MUSICAS; j++) {
-            printf("  Quantas vezes você ouviu '%s'? ", musicas[j]);
-            scanf("%d", &escutas[i][j]);
-            totalPorDia[i] += escutas[i][j];
-            totalPorMusica[j] += escutas[i][j];
-        }
-        printf("\n");
-    }
+## 🛠️ Tecnologias Utilizadas
 
-    int picoDia = 0;
-    for (int i = 1; i < DIAS; i++) {
-        if (totalPorDia[i] > totalPorDia[picoDia]) {
-            picoDia = i;
-        }
-    }
+- Linguagem C
+- Vetores e Matrizes
+- Laços de repetição (`for`)
+- Estruturas de decisão (`if`)
+- Console para entrada e saída de dados
 
-    int hit = 0;
-    for (int j = 1; j < MUSICAS; j++) {
-        if (totalPorMusica[j] > totalPorMusica[hit]) {
-            hit = j;
-        }
-    }
+## 📸 Exemplo de Execução
 
-    printf("\n📊 Total de escutas por dia:\n");
-    for (int i = 0; i < DIAS; i++) {
-        printf("%s: %d escutas\n", dias[i], totalPorDia[i]);
-    }
+```plaintext
+🎵 Bem-vindo ao MeuSomTracker!
+Vamos registrar quantas vezes você ouviu suas músicas favoritas durante a semana.
 
-    printf("\n🎶 Total de escutas por música:\n");
-    for (int j = 0; j < MUSICAS; j++) {
-        printf("%s: %d escutas\n", musicas[j], totalPorMusica[j]);
-    }
+Dia Seg:
+  Quantas vezes você ouviu 'Creep - Radiohead'? 3
+  Quantas vezes você ouviu 'Boys Don't Cry - The Cure'? 2
+  ...
 
-    printf("\n🔥 Dia que você mais ouviu música: %s (%d escutas)\n", dias[picoDia], totalPorDia[picoDia]);
-    printf("⭐ Música mais escutada: %s (%d escutas)\n", musicas[hit], totalPorMusica[hit]);
-
-    printf("\n📈 Gráfico de Popularidade:\n");
-    for (int j = 0; j < MUSICAS; j++) {
-        printf("%s: ", musicas[j]);
-        int barras = totalPorMusica[j] / 2;
-        for (int b = 0; b < barras; b++) {
-            printf("♪");
-        }
-        printf("\n");
-    }
-
-    return 0;
-    }
